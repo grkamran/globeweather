@@ -1,0 +1,1066 @@
+{% extends "base.html" %}
+{% block title %}GlobeWeather{% endblock %}
+
+{% block content %}
+<div class="layout">
+
+  <div class="topbar">
+    <div class="brand">
+      <button class="profilebtn" id="menuBtn" type="button" aria-label="Menu">
+        <div class="logo"></div>
+      </button>
+
+      <b id="brandTitle">Weather</b>
+
+      <!-- MENU -->
+      <div class="menu" id="menu">
+        <!-- MAIN -->
+        <div id="menuMain">
+          <div class="menu-title" id="menuTitle">Menu</div>
+
+          <div class="menu-item" id="menuLanguage">
+            <div class="menu-left">
+              <div class="menu-ico">🌐</div>
+              <div class="menu-meta">
+                <b id="langTitle">Language</b>
+                <span id="langSubtitle">Change UI language</span>
+              </div>
+            </div>
+            <div class="menu-right" id="openText1">Open</div>
+          </div>
+
+          <div class="menu-item" id="menuContacts">
+            <div class="menu-left">
+              <div class="menu-ico">📩</div>
+              <div class="menu-meta">
+                <b id="contactsTitle">Contacts</b>
+                <span id="contactsSubtitle">Contact support</span>
+              </div>
+            </div>
+            <div class="menu-right" id="openText2">Open</div>
+          </div>
+        </div>
+
+        <!-- CONTACTS PANEL -->
+        <div id="menuContactsPanel" style="display:none;">
+          <div class="menu-title" id="contactsPanelTitle">Contacts</div>
+
+          <div class="menu-item" id="openEmail">
+            <div class="menu-left">
+              <div class="menu-ico">✉️</div>
+              <div class="menu-meta">
+                <b id="emailTitle">Email</b>
+                <span>kkaraev1@stu.vistula.edu.pl</span>
+              </div>
+            </div>
+            <div class="menu-right" id="openText3">Open</div>
+          </div>
+
+          <div class="menu-item" id="openInsta">
+            <div class="menu-left">
+              <div class="menu-ico">📷</div>
+              <div class="menu-meta">
+                <b id="instaTitle">Instagram</b>
+                <span>@grkamran</span>
+              </div>
+            </div>
+            <div class="menu-right" id="openText4">Open</div>
+          </div>
+
+          <button class="menu-back" id="backToMenu1" type="button">← Back</button>
+        </div>
+
+        <!-- LANGUAGE PANEL -->
+        <div id="menuLanguagePanel" style="display:none;">
+          <div class="menu-title" id="languagePanelTitle">Choose language</div>
+
+          <div class="menu-item" data-lang="en">
+            <div class="menu-left">
+              <div class="menu-ico">🇬🇧</div>
+              <div class="menu-meta">
+                <b>English</b>
+                <span>EN</span>
+              </div>
+            </div>
+            <div class="menu-right" id="selectText1">Select</div>
+          </div>
+
+          <div class="menu-item" data-lang="ru">
+            <div class="menu-left">
+              <div class="menu-ico">🇷🇺</div>
+              <div class="menu-meta">
+                <b>Русский</b>
+                <span>RU</span>
+              </div>
+            </div>
+            <div class="menu-right" id="selectText2">Select</div>
+          </div>
+
+          <div class="menu-item" data-lang="tr">
+            <div class="menu-left">
+              <div class="menu-ico">🇹🇷</div>
+              <div class="menu-meta">
+                <b>Türkçe</b>
+                <span>TR</span>
+              </div>
+            </div>
+            <div class="menu-right" id="selectText3">Select</div>
+          </div>
+
+          <div class="menu-item" data-lang="uk">
+            <div class="menu-left">
+              <div class="menu-ico">🇺🇦</div>
+              <div class="menu-meta">
+                <b>Українська</b>
+                <span>UK</span>
+              </div>
+            </div>
+            <div class="menu-right" id="selectText4">Select</div>
+          </div>
+
+          <div class="menu-item" data-lang="pl">
+            <div class="menu-left">
+              <div class="menu-ico">🇵🇱</div>
+              <div class="menu-meta">
+                <b>Polski</b>
+                <span>PL</span>
+              </div>
+            </div>
+            <div class="menu-right" id="selectText5">Select</div>
+          </div>
+
+          <button class="menu-back" id="backToMenu2" type="button">← Back</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search input (FULL WIDTH like Google Maps) -->
+    <div class="searchwrap">
+      <input id="q" placeholder="Search city" autocomplete="off" />
+      <div id="suggestBox" class="suggestbox" style="display:none;"></div>
+    </div>
+
+    <div class="statuspill" id="status">
+      <span class="spin"></span>
+      <span id="statusText">Ready</span>
+    </div>
+  </div>
+
+  <section class="map-panel">
+    <div id="map" aria-label="Map"></div>
+  </section>
+
+  <aside class="right">
+    <div class="right-title">
+      <b id="rightTitle">Next 4 days</b>
+      <span class="tag" id="rtag">—</span>
+    </div>
+
+    <div class="citylist" id="daylist">
+      <div class="citycard" id="placeholderCard">
+        <div class="city-left">
+          <div class="ico">🔎</div>
+          <div class="city-meta">
+            <b id="phTitle">Search a city</b>
+            <span id="phSub">Type a city name and pick a suggestion to show the next 4 days forecast.</span>
+          </div>
+        </div>
+        <div class="city-temp" style="opacity:.75;">—</div>
+      </div>
+    </div>
+  </aside>
+
+  <section class="bottom">
+    <div class="bottom-head">
+      <b id="sunTimeTitle">Sun • Time</b>
+      <span class="tag" id="updated">—</span>
+    </div>
+
+    <div
+      style="
+        border:1px solid rgba(255,255,255,.14);
+        background: rgba(255,255,255,.06);
+        border-radius: 16px;
+        padding: 10px;
+        display:flex;
+        flex-direction:column;
+        gap:8px;
+        overflow:hidden;
+      "
+    >
+      <div style="display:flex; justify-content:space-between; gap:10px; align-items:center;">
+        <span id="localTimeLabel" style="font-size:12px; color:rgba(255,255,255,.62); font-family: ui-monospace,monospace;">Local time</span>
+        <b id="localtime" style="font-size:14px; letter-spacing:.2px;">—</b>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; gap:10px; align-items:center;">
+        <span id="sunriseLabel" style="font-size:12px; color:rgba(255,255,255,.62); font-family: ui-monospace,monospace;">Sunrise</span>
+        <b id="sunrise" style="font-size:14px; letter-spacing:.2px;">—</b>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; gap:10px; align-items:center;">
+        <span id="sunsetLabel" style="font-size:12px; color:rgba(255,255,255,.62); font-family: ui-monospace,monospace;">Sunset</span>
+        <b id="sunset" style="font-size:14px; letter-spacing:.2px;">—</b>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; gap:10px; align-items:center;">
+        <span id="dayLenLabel" style="font-size:12px; color:rgba(255,255,255,.62); font-family: ui-monospace,monospace;">Day length</span>
+        <b id="daylen" style="font-size:14px; letter-spacing:.2px;">—</b>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ✅ EASTER EGG OVERLAY (Ratne Anna) -->
+<div id="loveOverlay" class="love-overlay" aria-hidden="true">
+  <div class="love-bg"></div>
+  <div class="love-hearts" id="loveHearts"></div>
+</div>
+
+<!-- ✅ Suggestions CSS (small, clean, google-like) -->
+<style>
+  .suggestbox{
+    position:absolute;
+    top:52px;
+    left:0;
+    right:0;
+    border-radius: 16px;
+    border:1px solid rgba(255,255,255,.16);
+    background: linear-gradient(180deg, rgba(16,20,52,.96), rgba(10,14,36,.92));
+    backdrop-filter: blur(14px);
+    box-shadow: 0 26px 90px rgba(0,0,0,.62);
+    overflow:hidden;
+    z-index: 99999;
+    padding: 8px;
+  }
+  .sug-item{
+    width:100%;
+    border:1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.06);
+    border-radius: 14px;
+    padding: 10px 10px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom: 8px;
+  }
+  .sug-item:last-child{ margin-bottom: 0; }
+  .sug-item:hover,
+  .sug-item.active{
+    border-color: rgba(6,182,212,.35);
+    box-shadow: 0 0 0 4px rgba(6,182,212,.10);
+  }
+  .sug-ico{
+    width:34px;height:34px;border-radius: 14px;
+    border:1px solid rgba(255,255,255,.14);
+    background: rgba(0,0,0,.18);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex:0 0 auto;
+  }
+  .sug-meta{ min-width:0; }
+  .sug-meta b{
+    display:block;
+    font-size: 13px;
+    font-weight: 950;
+    letter-spacing:.2px;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+  }
+  .sug-meta span{
+    display:block;
+    margin-top: 3px;
+    color: rgba(255,255,255,.62);
+    font-family: ui-monospace,monospace;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+  }
+  .sug-empty{
+    border:1px dashed rgba(255,255,255,.18);
+    background: rgba(255,255,255,.04);
+    border-radius: 14px;
+    padding: 10px;
+    color: rgba(255,255,255,.62);
+    font-family: ui-monospace,monospace;
+    font-size: 12px;
+  }
+
+  /* ✅ LOVE OVERLAY */
+  .love-overlay{
+    position: fixed;
+    inset: 0;
+    z-index: 9999999;
+    display: none;
+    pointer-events: none;
+  }
+  .love-overlay.show{ display:block; }
+
+  .love-bg{
+    position:absolute;
+    inset:0;
+    background: #000;
+    transition: background 1.2s ease;
+  }
+  .love-overlay.pink .love-bg{
+    background: #ff4fa3; /* розовый фон */
+  }
+
+  .love-hearts{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+  }
+
+  .love-heart{
+    position:absolute;
+    bottom: -80px;
+    left: 50%;
+    font-size: 28px;
+    opacity: 0.0;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 10px 18px rgba(0,0,0,.25));
+    animation: love-rise linear forwards;
+    user-select:none;
+    will-change: transform, opacity;
+  }
+
+  @keyframes love-rise{
+    0%{
+      transform: translateX(var(--x)) translateY(0) scale(var(--s)) rotate(var(--r));
+      opacity: 0;
+    }
+    10%{ opacity: .95; }
+    60%{ opacity: .95; }
+    100%{
+      transform: translateX(calc(var(--x) + var(--drift))) translateY(calc(-1 * var(--h))) scale(var(--s)) rotate(calc(var(--r) + 40deg));
+      opacity: 0;
+    }
+  }
+</style>
+
+<script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin=""
+></script>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+
+  // =========================
+  // i18n (UI Language)
+  // =========================
+  const I18N = {
+    en: {
+      brandTitle: "Weather",
+      menuTitle: "Menu",
+      langTitle: "Language",
+      langSubtitle: "Change UI language",
+      contactsTitle: "Contacts",
+      contactsSubtitle: "Contact support",
+      open: "Open",
+      select: "Select",
+      back: "← Back",
+      languagePanelTitle: "Choose language",
+      searchPlaceholder: "Search city",
+      ready: "Ready",
+      typeCityName: "Type a city name",
+      next4days: "Next 4 days",
+      placeholderTitle: "Search a city",
+      placeholderSub: "Type a city name and pick a suggestion to show the next 4 days forecast.",
+      sunTime: "Sun • Time",
+      localTime: "Local time",
+      sunrise: "Sunrise",
+      sunset: "Sunset",
+      dayLen: "Day length",
+      updated: "Updated",
+      hum: "Hum",
+      wind: "Wind",
+      ms: "m/s",
+      searching: "Searching…",
+      done: "Done",
+      errorPrefix: "Error: ",
+      noForecastTitle: "No forecast",
+      tryAnotherCity: "Try another city",
+      noSuggestions: "No matches",
+    },
+
+    ru: {
+      brandTitle: "Погода",
+      menuTitle: "Меню",
+      langTitle: "Язык",
+      langSubtitle: "Изменить язык интерфейса",
+      contactsTitle: "Контакты",
+      contactsSubtitle: "Связаться с поддержкой",
+      open: "Открыть",
+      select: "Выбрать",
+      back: "← Назад",
+      languagePanelTitle: "Выберите язык",
+      searchPlaceholder: "Введите город",
+      ready: "Готово",
+      typeCityName: "Введите название города",
+      next4days: "Следующие 4 дня",
+      placeholderTitle: "Найдите город",
+      placeholderSub: "Введите город и выберите подсказку, чтобы увидеть прогноз на 4 дня.",
+      sunTime: "Солнце • Время",
+      localTime: "Местное время",
+      sunrise: "Восход",
+      sunset: "Закат",
+      dayLen: "Длина дня",
+      updated: "Обновлено",
+      hum: "Влажн.",
+      wind: "Ветер",
+      ms: "м/с",
+      searching: "Поиск…",
+      done: "Готово",
+      errorPrefix: "Ошибка: ",
+      noForecastTitle: "Нет прогноза",
+      tryAnotherCity: "Попробуйте другой город",
+      noSuggestions: "Ничего не найдено",
+    },
+
+    tr: {
+      brandTitle: "Hava",
+      menuTitle: "Menü",
+      langTitle: "Dil",
+      langSubtitle: "Arayüz dilini değiştir",
+      contactsTitle: "İletişim",
+      contactsSubtitle: "Destek ile iletişime geç",
+      open: "Aç",
+      select: "Seç",
+      back: "← Geri",
+      languagePanelTitle: "Dil seçin",
+      searchPlaceholder: "Şehir ara",
+      ready: "Hazır",
+      typeCityName: "Bir şehir adı yaz",
+      next4days: "Önümüzdeki 4 gün",
+      placeholderTitle: "Şehir ara",
+      placeholderSub: "Şehir yaz ve önerilerden seç. 4 günlük tahmin gösterilecek.",
+      sunTime: "Güneş • Saat",
+      localTime: "Yerel saat",
+      sunrise: "Gün doğumu",
+      sunset: "Gün batımı",
+      dayLen: "Gün uzunluğu",
+      updated: "Güncellendi",
+      hum: "Nem",
+      wind: "Rüzgar",
+      ms: "m/sn",
+      searching: "Aranıyor…",
+      done: "Bitti",
+      errorPrefix: "Hata: ",
+      noForecastTitle: "Tahmin yok",
+      tryAnotherCity: "Başka bir şehir deneyin",
+      noSuggestions: "Sonuç yok",
+    },
+
+    uk: {
+      brandTitle: "Погода",
+      menuTitle: "Меню",
+      langTitle: "Мова",
+      langSubtitle: "Змінити мову інтерфейсу",
+      contactsTitle: "Контакти",
+      contactsSubtitle: "Зв’язатися з підтримкою",
+      open: "Відкрити",
+      select: "Обрати",
+      back: "← Назад",
+      languagePanelTitle: "Оберіть мову",
+      searchPlaceholder: "Пошук міста",
+      ready: "Готово",
+      typeCityName: "Введіть назву міста",
+      next4days: "Наступні 4 дні",
+      placeholderTitle: "Знайдіть місто",
+      placeholderSub: "Введіть місто та оберіть підказку. Показуємо прогноз на 4 дні.",
+      sunTime: "Сонце • Час",
+      localTime: "Місцевий час",
+      sunrise: "Схід",
+      sunset: "Захід",
+      dayLen: "Тривалість дня",
+      updated: "Оновлено",
+      hum: "Волог.",
+      wind: "Вітер",
+      ms: "м/с",
+      searching: "Пошук…",
+      done: "Готово",
+      errorPrefix: "Помилка: ",
+      noForecastTitle: "Немає прогнозу",
+      tryAnotherCity: "Спробуйте інше місто",
+      noSuggestions: "Нічого не знайдено",
+    },
+
+    pl: {
+      brandTitle: "Pogoda",
+      menuTitle: "Menu",
+      langTitle: "Język",
+      langSubtitle: "Zmień język interfejsu",
+      contactsTitle: "Kontakt",
+      contactsSubtitle: "Skontaktuj się ze wsparciem",
+      open: "Otwórz",
+      select: "Wybierz",
+      back: "← Wróć",
+      languagePanelTitle: "Wybierz język",
+      searchPlaceholder: "Szukaj miasta",
+      ready: "Gotowe",
+      typeCityName: "Wpisz nazwę miasta",
+      next4days: "Kolejne 4 dni",
+      placeholderTitle: "Wyszukaj miasto",
+      placeholderSub: "Wpisz miasto i wybierz podpowiedź, aby zobaczyć prognozę na 4 dni.",
+      sunTime: "Słońce • Czas",
+      localTime: "Czas lokalny",
+      sunrise: "Wschód słońca",
+      sunset: "Zachód słońca",
+      dayLen: "Długość dnia",
+      updated: "Zaktualizowano",
+      hum: "Wilg.",
+      wind: "Wiatr",
+      ms: "m/s",
+      searching: "Szukanie…",
+      done: "Gotowe",
+      errorPrefix: "Błąd: ",
+      noForecastTitle: "Brak prognozy",
+      tryAnotherCity: "Spróbuj inne miasto",
+      noSuggestions: "Brak wyników",
+    },
+  };
+
+  function getLang() {
+    return localStorage.getItem("gw_lang") || "en";
+  }
+
+  function t(key){
+    const lang = getLang();
+    return (I18N[lang] && I18N[lang][key]) ? I18N[lang][key] : (I18N.en[key] || key);
+  }
+
+  function localeForLang(lang){
+    switch((lang || "en").toLowerCase()){
+      case "ru": return "ru-RU";
+      case "uk": return "uk-UA";
+      case "tr": return "tr-TR";
+      case "pl": return "pl-PL";
+      default: return "en-US";
+    }
+  }
+
+  function applyLang(lang){
+    $("brandTitle").textContent = I18N[lang].brandTitle;
+    $("q").placeholder = I18N[lang].searchPlaceholder;
+
+    $("menuTitle").textContent = I18N[lang].menuTitle;
+
+    $("langTitle").textContent = I18N[lang].langTitle;
+    $("langSubtitle").textContent = I18N[lang].langSubtitle;
+
+    $("contactsTitle").textContent = I18N[lang].contactsTitle;
+    $("contactsSubtitle").textContent = I18N[lang].contactsSubtitle;
+
+    $("openText1").textContent = I18N[lang].open;
+    $("openText2").textContent = I18N[lang].open;
+    $("openText3").textContent = I18N[lang].open;
+    $("openText4").textContent = I18N[lang].open;
+
+    $("selectText1").textContent = I18N[lang].select;
+    $("selectText2").textContent = I18N[lang].select;
+    $("selectText3").textContent = I18N[lang].select;
+    $("selectText4").textContent = I18N[lang].select;
+    $("selectText5").textContent = I18N[lang].select;
+
+    $("contactsPanelTitle").textContent = I18N[lang].contactsTitle;
+    $("emailTitle").textContent =
+      (lang === "ru") ? "Почта" :
+      (lang === "uk") ? "Пошта" :
+      (lang === "tr") ? "E-posta" :
+      (lang === "pl") ? "Email" : "Email";
+    $("instaTitle").textContent = "Instagram";
+
+    $("backToMenu1").textContent = I18N[lang].back;
+    $("backToMenu2").textContent = I18N[lang].back;
+    $("languagePanelTitle").textContent = I18N[lang].languagePanelTitle;
+
+    $("rightTitle").textContent = I18N[lang].next4days;
+
+    $("phTitle").textContent = I18N[lang].placeholderTitle;
+    $("phSub").textContent = I18N[lang].placeholderSub;
+
+    $("sunTimeTitle").textContent = I18N[lang].sunTime;
+    $("localTimeLabel").textContent = I18N[lang].localTime;
+    $("sunriseLabel").textContent = I18N[lang].sunrise;
+    $("sunsetLabel").textContent = I18N[lang].sunset;
+    $("dayLenLabel").textContent = I18N[lang].dayLen;
+
+    const st = $("statusText").textContent.trim();
+    if (st && ["Ready","Готово","Hazır","Gotowe"].includes(st)) {
+      $("statusText").textContent = I18N[lang].ready;
+    }
+  }
+
+  // =========================
+  // MENU LOGIC
+  // =========================
+  const menuBtn = $("menuBtn");
+  const menu = $("menu");
+
+  const menuMain = $("menuMain");
+  const menuContactsPanel = $("menuContactsPanel");
+  const menuLanguagePanel = $("menuLanguagePanel");
+
+  function showMain(){
+    menuMain.style.display = "block";
+    menuContactsPanel.style.display = "none";
+    menuLanguagePanel.style.display = "none";
+  }
+  function showContacts(){
+    menuMain.style.display = "none";
+    menuContactsPanel.style.display = "block";
+    menuLanguagePanel.style.display = "none";
+  }
+  function showLanguage(){
+    menuMain.style.display = "none";
+    menuContactsPanel.style.display = "none";
+    menuLanguagePanel.style.display = "block";
+  }
+
+  function openMenu(){ menu.classList.add("show"); }
+  function closeMenu(){
+    menu.classList.remove("show");
+    showMain();
+  }
+
+  menuBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if(menu.classList.contains("show")) closeMenu();
+    else openMenu();
+  });
+
+  document.addEventListener("click", () => closeMenu());
+  menu.addEventListener("click", (e) => e.stopPropagation());
+
+  $("menuLanguage").addEventListener("click", () => showLanguage());
+  $("menuContacts").addEventListener("click", () => showContacts());
+
+  $("backToMenu1").addEventListener("click", () => showMain());
+  $("backToMenu2").addEventListener("click", () => showMain());
+
+  menuLanguagePanel.addEventListener("click", (e) => {
+    const item = e.target.closest(".menu-item[data-lang]");
+    if(!item) return;
+    const lang = item.getAttribute("data-lang");
+    localStorage.setItem("gw_lang", lang);
+    location.reload();
+  });
+
+  $("openEmail").addEventListener("click", () => {
+    window.location.href = "mailto:kkaraev1@stu.vistula.edu.pl";
+  });
+  $("openInsta").addEventListener("click", () => {
+    window.open("https://www.instagram.com/grkamran/", "_blank", "noopener,noreferrer");
+  });
+
+  // =========================
+  // ✅ EASTER EGG: "Ратне анна"
+  // =========================
+  const loveOverlay = $("loveOverlay");
+  const loveHearts = $("loveHearts");
+  let loveRunning = false;
+
+  function normalizeQuery(s){
+    return String(s || "")
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, " "); // много пробелов -> один
+  }
+
+  function startLoveEasterEgg(){
+    if(loveRunning) return;
+    loveRunning = true;
+
+    // show overlay, start black
+    loveOverlay.classList.add("show");
+    loveOverlay.classList.remove("pink");
+    loveHearts.innerHTML = "";
+
+    // чуть позже делаем розовый (чтобы было видно смену)
+    setTimeout(() => {
+      loveOverlay.classList.add("pink");
+    }, 400);
+
+    // генерация сердечек
+    const hearts = ["💗","💖","💘","💕","💞","💓"];
+    const start = Date.now();
+
+    function spawnHeart(){
+      const h = document.createElement("div");
+      h.className = "love-heart";
+      h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+
+      const left = Math.random() * 100;         // %
+      const scale = 0.7 + Math.random() * 1.3;  // 0.7..2.0
+      const height = 550 + Math.random() * 650; // px
+      const drift = (-80 + Math.random() * 160); // px
+      const rot = (-25 + Math.random() * 50);    // deg
+      const dur = 3.2 + Math.random() * 2.8;     // sec
+
+      h.style.left = left + "%";
+      h.style.setProperty("--x", "0px");
+      h.style.setProperty("--s", scale.toFixed(2));
+      h.style.setProperty("--h", height.toFixed(0) + "px");
+      h.style.setProperty("--drift", drift.toFixed(0) + "px");
+      h.style.setProperty("--r", rot.toFixed(0) + "deg");
+      h.style.animationDuration = dur.toFixed(2) + "s";
+
+      loveHearts.appendChild(h);
+
+      // убрать после анимации
+      setTimeout(() => {
+        h.remove();
+      }, (dur + 0.2) * 1000);
+    }
+
+    const interval = setInterval(() => {
+      // чуть плотнее “снизу вверх”
+      spawnHeart();
+      if(Math.random() > 0.55) spawnHeart();
+
+      if(Date.now() - start >= 10000){
+        clearInterval(interval);
+      }
+    }, 140);
+
+    // через 10 сек “как будто сайт заного открылся”
+    setTimeout(() => {
+      location.reload();
+    }, 10000);
+  }
+
+  // =========================
+  // WEATHER APP
+  // =========================
+  const statusEl = $("status");
+  const statusText = $("statusText");
+
+  function setStatus(text, mode="ready"){
+    statusText.textContent = text;
+    statusEl.classList.toggle("loading", mode === "loading");
+    statusText.classList.toggle("err", mode === "error");
+  }
+
+  function nowTime(){
+    return new Date().toLocaleTimeString(localeForLang(getLang()), {hour:"2-digit", minute:"2-digit"});
+  }
+
+  function fmtLocalClockFromOffset(offsetSeconds){
+    const nowUtcMs = Date.now();
+    const localMs = nowUtcMs + (offsetSeconds * 1000);
+    const d = new Date(localMs);
+    return d.toLocaleTimeString(localeForLang(getLang()), {hour:"2-digit", minute:"2-digit"});
+  }
+
+  const map = L.map("map", {
+    zoomControl:true,
+    preferCanvas:true,
+    minZoom: 2
+  }).setView([20,10], 2);
+
+  const worldBounds = L.latLngBounds(L.latLng(-85, -180), L.latLng(85, 180));
+  map.setMaxBounds(worldBounds);
+  map.on("drag", () => map.panInsideBounds(worldBounds, { animate:false }));
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap'
+  }).addTo(map);
+
+  let pinMarker = null;
+
+  function makePinCard(minT, maxT, desc, hum, wind){
+    return `
+      <div class="pin-card" style="width: 180px; text-align:left; padding:12px 12px 12px;">
+        <div style="font-weight:950; font-size:22px; letter-spacing:.2px;">
+          ${Math.round(minT)}°/${Math.round(maxT)}°
+        </div>
+        <div style="margin-top:6px; font-size:12px; color:rgba(255,255,255,.78);">
+          ${desc || "—"}
+        </div>
+        <div style="margin-top:8px; font-size:12px; color:rgba(255,255,255,.78);">
+          ${t("hum")} ${hum ?? "—"}%
+        </div>
+        <div style="margin-top:4px; font-size:12px; color:rgba(255,255,255,.78);">
+          ${t("wind")} ${wind ?? "—"} ${t("ms")}
+        </div>
+      </div>
+    `;
+  }
+
+  function setPin(lat, lon, minT, maxT, desc, hum, wind){
+    const icon = L.divIcon({
+      className: "",
+      html: makePinCard(minT, maxT, desc, hum, wind),
+      iconSize: [180, 118],
+      iconAnchor: [90, 118]
+    });
+
+    if (pinMarker) map.removeLayer(pinMarker);
+    pinMarker = L.marker([lat, lon], { icon }).addTo(map);
+  }
+
+  async function apiSearch(city){
+    const lang = getLang();
+    const res = await fetch(`/api/search/?city=${encodeURIComponent(city)}&lang=${encodeURIComponent(lang)}`);
+    const data = await res.json().catch(() => ({}));
+    if(!res.ok){
+      const msg = data?.error || "Request failed";
+      throw new Error(msg);
+    }
+    return data;
+  }
+
+  async function apiSuggest(q){
+    const lang = getLang();
+    const res = await fetch(`/api/suggest/?q=${encodeURIComponent(q)}&lang=${encodeURIComponent(lang)}&limit=7`);
+    const data = await res.json().catch(() => ({}));
+    if(!res.ok){
+      return { suggestions: [] };
+    }
+    return data;
+  }
+
+  function dayLabel(iso){
+    const d = new Date(iso + "T00:00:00");
+    return d.toLocaleDateString(localeForLang(getLang()), { weekday:"short", month:"short", day:"numeric" });
+  }
+
+  function iconFor(desc=""){
+    const txt = (desc || "").toLowerCase();
+    if (txt.includes("rain")) return "🌧️";
+    if (txt.includes("cloud")) return "☁️";
+    if (txt.includes("snow")) return "🌨️";
+    if (txt.includes("storm") || txt.includes("thunder")) return "⛈️";
+    if (txt.includes("clear")) return "☀️";
+    return "⛅";
+  }
+
+  function renderNext4Days(daily){
+    const list = $("daylist");
+    list.innerHTML = "";
+
+    const next = (daily || []).slice(1, 5);
+
+    if (!next.length){
+      const el = document.createElement("div");
+      el.className = "citycard";
+      el.innerHTML = `
+        <div class="city-left">
+          <div class="ico">⛅</div>
+          <div class="city-meta">
+            <b>${t("noForecastTitle")}</b>
+            <span>${t("tryAnotherCity")}</span>
+          </div>
+        </div>
+        <div class="city-temp">—</div>
+      `;
+      list.appendChild(el);
+      return;
+    }
+
+    next.forEach(d => {
+      const el = document.createElement("div");
+      el.className = "citycard";
+      el.innerHTML = `
+        <div class="city-left">
+          <div class="ico">${iconFor(d.description)}</div>
+          <div class="city-meta">
+            <b>${dayLabel(d.date)}</b>
+            <span>${(d.description || "—")} • ${t("hum")} ${d.humidity}% • ${t("wind")} ${d.wind_speed} ${t("ms")}</span>
+          </div>
+        </div>
+        <div class="city-temp">${Math.round(d.min)}°/${Math.round(d.max)}°</div>
+      `;
+      list.appendChild(el);
+    });
+  }
+
+  function renderSunPanel(c, sun){
+    $("updated").textContent = `${t("updated")} ${nowTime()}`;
+    const offset = Number(c.timezone || 0);
+    $("localtime").textContent = fmtLocalClockFromOffset(offset);
+    $("sunrise").textContent = (sun && sun.sunrise) ? sun.sunrise : "—";
+    $("sunset").textContent  = (sun && sun.sunset)  ? sun.sunset  : "—";
+    $("daylen").textContent  = (sun && sun.day_length) ? sun.day_length : "—";
+  }
+
+  async function search(city){
+    // ✅ trigger easter egg BEFORE any request
+    if(normalizeQuery(city) === "ратне анна"){
+      startLoveEasterEgg();
+      return;
+    }
+
+    if(!city){
+      setStatus(t("typeCityName"));
+      return;
+    }
+
+    try{
+      setStatus(t("searching"), "loading");
+      const data = await apiSearch(city);
+      const c = data.current;
+
+      setPin(c.lat, c.lon, c.temp_min, c.temp_max, c.description, c.humidity, c.wind_speed);
+      map.flyTo([c.lat, c.lon], 6, { animate:true, duration: 1.2 });
+
+      renderNext4Days(data.daily);
+      renderSunPanel(c, data.sun || null);
+
+      $("rtag").textContent = `${c.city}, ${c.country}`;
+      setStatus(t("done"));
+    }catch(e){
+      console.error(e);
+      setStatus(t("errorPrefix") + (e?.message || e), "error");
+    }
+  }
+
+  // =========================
+  // AUTOCOMPLETE (NO SEARCH BUTTON)
+  // =========================
+  const input = $("q");
+  const box = $("suggestBox");
+
+  let debounceTimer = null;
+  let activeIndex = -1;
+  let currentItems = [];
+
+  function closeSuggest(){
+    box.style.display = "none";
+    box.innerHTML = "";
+    activeIndex = -1;
+    currentItems = [];
+  }
+
+  function renderSuggest(items){
+    currentItems = items || [];
+    activeIndex = -1;
+
+    if(!currentItems.length){
+      box.innerHTML = `<div class="sug-empty">${t("noSuggestions")}</div>`;
+      box.style.display = "block";
+      return;
+    }
+
+    box.innerHTML = currentItems.map((it, idx) => {
+      const subtitle = it.subtitle ? it.subtitle : "";
+      return `
+        <div class="sug-item" data-idx="${idx}">
+          <div class="sug-ico">📍</div>
+          <div class="sug-meta">
+            <b>${escapeHtml(it.title)}</b>
+            <span>${escapeHtml(subtitle)}</span>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    box.style.display = "block";
+  }
+
+  function setActive(idx){
+    const els = [...box.querySelectorAll(".sug-item")];
+    els.forEach(e => e.classList.remove("active"));
+    if(idx >= 0 && idx < els.length){
+      els[idx].classList.add("active");
+      activeIndex = idx;
+      els[idx].scrollIntoView({ block: "nearest" });
+    } else {
+      activeIndex = -1;
+    }
+  }
+
+  function escapeHtml(s){
+    return String(s ?? "").replace(/[&<>"']/g, (c) => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[c]));
+  }
+
+  async function doSuggest(){
+    const q = input.value.trim();
+    if(q.length < 2){
+      closeSuggest();
+      return;
+    }
+    const data = await apiSuggest(q);
+    renderSuggest(data.suggestions || []);
+  }
+
+  input.addEventListener("input", () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(doSuggest, 250);
+  });
+
+  // click on suggestion
+  box.addEventListener("click", (e) => {
+    const item = e.target.closest(".sug-item");
+    if(!item) return;
+    const idx = Number(item.getAttribute("data-idx"));
+    const it = currentItems[idx];
+    if(!it) return;
+
+    input.value = it.title;
+    closeSuggest();
+    search(it.title);
+  });
+
+  // keyboard navigation
+  input.addEventListener("keydown", (e) => {
+    // Enter even when box closed
+    if(box.style.display !== "block"){
+      if(e.key === "Enter"){
+        e.preventDefault();
+        const q = input.value.trim();
+        if(q) search(q);
+      }
+      return;
+    }
+
+    if(e.key === "ArrowDown"){
+      e.preventDefault();
+      setActive(Math.min(activeIndex + 1, currentItems.length - 1));
+    } else if(e.key === "ArrowUp"){
+      e.preventDefault();
+      setActive(Math.max(activeIndex - 1, 0));
+    } else if(e.key === "Escape"){
+      e.preventDefault();
+      closeSuggest();
+    } else if(e.key === "Enter"){
+      e.preventDefault();
+      if(activeIndex >= 0 && currentItems[activeIndex]){
+        const it = currentItems[activeIndex];
+        input.value = it.title;
+        closeSuggest();
+        search(it.title);
+      } else {
+        const q = input.value.trim();
+        closeSuggest();
+        if(q) search(q);
+      }
+    }
+  });
+
+  // close on outside click
+  document.addEventListener("click", (e) => {
+    const wrap = input.parentElement;
+    if(!wrap.contains(e.target)) closeSuggest();
+  });
+
+  // =========================
+  // INIT
+  // =========================
+  applyLang(getLang());
+  setStatus(t("ready"));
+})();
+</script>
+{% endblock %}

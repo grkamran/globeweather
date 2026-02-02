@@ -1,0 +1,9 @@
+Django>=5.0,<5.2
+gunicorn==22.0.0
+whitenoise==6.7.0
+requests==2.32.3
+
+google-cloud-translate==3.15.5
+google-auth==2.33.0
+google-api-core==2.19.1
+grpcio==1.65.5
