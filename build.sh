@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -o errexit
 
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
+
 
 # Google credentials (JSON из env → файл)
 if [ -n "$GOOGLE_CREDS_JSON" ]; then
