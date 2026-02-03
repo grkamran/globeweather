@@ -30,7 +30,6 @@
       --shadow: 0 26px 90px rgba(0,0,0,.62);
       --r: 22px;
 
-      /* ✅ right tərəf daha "solid" olsun deyə */
       --panelSolidTop: rgba(12, 16, 44, .94);
       --panelSolidBot: rgba(10, 14, 36, .90);
       --cardSolid: rgba(14, 18, 46, .82);
@@ -138,19 +137,6 @@
       box-shadow: 0 0 0 4px rgba(6,182,212,.14);
     }
 
-    .btn{
-      height:44px;
-      padding:0 16px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.18);
-      background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(6,182,212,.88));
-      color:white;
-      font-weight:950;
-      letter-spacing:.2px;
-      cursor:pointer;
-    }
-    .btn:active{ transform: scale(.985); }
-
     .statuspill{
       display:flex;
       align-items:center;
@@ -191,6 +177,16 @@
       display:none;
       z-index: 9999;
     }
+    /* ✅ MENU: скролл внутри, но без видимой полосы */
+.menu{
+  max-height: calc(100vh - 90px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch; /* плавный скролл на телефоне */
+  scrollbar-width: none;            /* Firefox */
+}
+.menu::-webkit-scrollbar{ width: 0; height: 0; } /* Chrome/Safari */
+
     .menu.show{ display:block; }
 
     .menu-title{
@@ -279,6 +275,40 @@
     }
     .menu-back:active{ transform: scale(.99); }
 
+    /* ✅ INVISIBLE SCROLL + FADE */
+    .menu-panel{
+      overflow:auto;
+      max-height: 360px;
+      padding-right: 6px;
+      position: relative;
+      scrollbar-width: none;
+    }
+    .menu-panel::-webkit-scrollbar{ width:0; height:0; }
+
+    .fade-scroll::before,
+    .fade-scroll::after{
+      content:"";
+      position: sticky;
+      left: 0;
+      right: 0;
+      height: 18px;
+      pointer-events: none;
+      display: block;
+      z-index: 50;
+      opacity: 1;
+      transition: opacity .25s ease;
+    }
+    .fade-scroll::before{
+      top: 0;
+      background: linear-gradient(to bottom, rgba(16,20,52,.95), rgba(16,20,52,0));
+    }
+    .fade-scroll::after{
+      bottom: 0;
+      background: linear-gradient(to top, rgba(10,14,36,.92), rgba(10,14,36,0));
+    }
+    .fade-scroll.at-top::before{ opacity: 0; }
+    .fade-scroll.at-bottom::after{ opacity: 0; }
+
     /* map panel */
     .map-panel{
       grid-row: 2 / 4;
@@ -294,7 +324,6 @@
     }
     #map{ width:100%; height:100%; }
 
-    /* right list */
     .right{
       grid-row: 2 / 3;
       grid-column: 2 / 3;
@@ -304,7 +333,6 @@
       overflow:hidden;
     }
 
-    /* ✅ ŞƏFFAFLIQ FIX: right başlıq daha solid */
     .right-title{
       display:flex;
       align-items:center;
@@ -340,22 +368,6 @@
       padding-right: 6px;
     }
 
-    .citylist::-webkit-scrollbar{ width: 10px; }
-    .citylist::-webkit-scrollbar-track{
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 999px;
-    }
-    .citylist::-webkit-scrollbar-thumb{
-      background: linear-gradient(180deg, rgba(124,58,237,.55), rgba(6,182,212,.45));
-      border: 1px solid rgba(255,255,255,.16);
-      border-radius: 999px;
-    }
-    .citylist::-webkit-scrollbar-thumb:hover{
-      background: linear-gradient(180deg, rgba(124,58,237,.75), rgba(6,182,212,.65));
-    }
-
-    /* ✅ ŞƏFFAFLIQ FIX: card-lar daha solid */
     .citycard{
       border:1px solid rgba(255,255,255,.16);
       background: linear-gradient(180deg, rgba(14,18,46,.84), rgba(12,16,42,.78));
@@ -404,12 +416,10 @@
       color: var(--muted);
       font-family: var(--mono);
       font-size: 12px;
-
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
-
       line-height: 1.25;
       max-width: 260px;
     }
@@ -422,7 +432,6 @@
       white-space: nowrap;
     }
 
-    /* ✅ ŞƏFFAFLIQ FIX: bottom panel daha solid */
     .bottom{
       grid-row: 3 / 4;
       grid-column: 2 / 3;
@@ -493,16 +502,12 @@
     }
 
     /* ===== FULL WIDTH SEARCH (Google Maps style) ===== */
-.searchwrap{
-  flex: 1;
-  position: relative;
-  min-width: 260px;
-}
-
-.searchwrap input{
-  width: 100%;
-}
-
+    .searchwrap{
+      flex: 1;
+      position: relative;
+      min-width: 260px;
+    }
+    .searchwrap input{ width: 100%; }
   </style>
 </head>
 
