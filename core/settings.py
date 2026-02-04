@@ -21,12 +21,12 @@ ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1").split(","
 # =========================
 # App keys (Env)
 # =========================
-OPENWEATHER_API_KEY = os.environ.get("OPENWEATHER_API_KEY", "0e6ce144287657c72296d77c547e0e2c")
-
+OPENWEATHER_API_KEY = os.environ.get(
+    "OPENWEATHER_API_KEY",
+    "0e6ce144287657c72296d77c547e0e2c"
+)
 
 # Google Translate (Google Cloud Translation API v3)
-# Мы НЕ храним json-файл в проекте.
-# На Render ты добавишь переменную GOOGLE_CREDS_JSON, а build.sh создаст файл в /tmp
 GOOGLE_TRANSLATE_PROJECT_ID = os.environ.get("GOOGLE_TRANSLATE_PROJECT_ID", "")
 
 # =========================
@@ -103,7 +103,21 @@ USE_TZ = True
 # =========================
 # Static files (Render + WhiteNoise)
 # =========================
-STATIC_URL = "static/"
+STATIC_URL = "/static/"  # ✅ обязательно с /
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# ✅ Говорим Django где лежат твои файлы: app/static/...
+STATICFILES_DIRS = [
+    BASE_DIR / "app" / "static",
+]
+
+# ✅ В DEBUG лучше без Manifest, иначе может ломать пути/404
+if DEBUG:
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+else:
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+# =========================
+# Default primary key field type
+# =========================
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

@@ -5,12 +5,16 @@ from django.http import JsonResponse
 import requests
 from collections import defaultdict
 from datetime import datetime, timezone as tz
+import os
+import re
 
 from google.cloud import translate_v3 as translate
 from google.oauth2 import service_account
-import os
 
 
+# =========================
+# Helpers
+# =========================
 def _get_json(url, params, timeout=25):
     try:
         r = requests.get(url, params=params, timeout=timeout)
@@ -48,19 +52,174 @@ def _normalize_lang(lang: str) -> str:
     return "en"
 
 
+def _looks_english(text: str) -> bool:
+    # если есть латинские буквы — почти наверняка англ
+    return bool(re.search(r"[a-zA-Z]", text or ""))
+
+
+# =========================
+# Fallback translations (when Google creds not set or API fails)
+# =========================
+_FALLBACK = {
+    "ru": {
+        "clear sky": "ясно",
+        "few clouds": "малооблачно",
+        "scattered clouds": "переменная облачность",
+        "broken clouds": "облачно с прояснениями",
+        "overcast clouds": "пасмурно",
+        "mist": "туман",
+        "haze": "дымка",
+        "fog": "туман",
+        "smoke": "дым",
+        "dust": "пыль",
+        "sand": "песок",
+        "ash": "пепел",
+        "squalls": "шквалы",
+        "tornado": "торнадо",
+        "light rain": "небольшой дождь",
+        "moderate rain": "умеренный дождь",
+        "heavy intensity rain": "сильный дождь",
+        "very heavy rain": "очень сильный дождь",
+        "extreme rain": "экстремальный дождь",
+        "freezing rain": "ледяной дождь",
+        "shower rain": "ливневый дождь",
+        "light snow": "небольшой снег",
+        "snow": "снег",
+        "heavy snow": "сильный снег",
+        "sleet": "мокрый снег",
+        "light shower sleet": "небольшой мокрый снег",
+        "shower sleet": "мокрый снег",
+        "thunderstorm": "гроза",
+        "thunderstorm with rain": "гроза с дождём",
+        "thunderstorm with light rain": "гроза с небольшим дождём",
+        "thunderstorm with heavy rain": "гроза с сильным дождём",
+    },
+    "tr": {
+        "clear sky": "açık",
+        "few clouds": "az bulutlu",
+        "scattered clouds": "parçalı bulutlu",
+        "broken clouds": "çok bulutlu",
+        "overcast clouds": "kapalı",
+        "mist": "sis",
+        "haze": "pus",
+        "fog": "sis",
+        "smoke": "duman",
+        "dust": "toz",
+        "sand": "kum",
+        "ash": "kül",
+        "squalls": "fırtına hamlesi",
+        "tornado": "hortum",
+        "light rain": "hafif yağmur",
+        "moderate rain": "orta şiddette yağmur",
+        "heavy intensity rain": "şiddetli yağmur",
+        "very heavy rain": "çok şiddetli yağmur",
+        "extreme rain": "aşırı yağmur",
+        "freezing rain": "dondurucu yağmur",
+        "shower rain": "sağanak",
+        "light snow": "hafif kar",
+        "snow": "kar",
+        "heavy snow": "yoğun kar",
+        "sleet": "sulu kar",
+        "light shower sleet": "hafif sulu kar",
+        "shower sleet": "sulu kar",
+        "thunderstorm": "gök gürültülü fırtına",
+        "thunderstorm with rain": "yağmurlu fırtına",
+        "thunderstorm with light rain": "hafif yağmurlu fırtına",
+        "thunderstorm with heavy rain": "şiddetli yağmurlu fırtına",
+    },
+    "uk": {
+        "clear sky": "ясно",
+        "few clouds": "малохмарно",
+        "scattered clouds": "мінлива хмарність",
+        "broken clouds": "хмарно з проясненнями",
+        "overcast clouds": "похмуро",
+        "mist": "туман",
+        "haze": "імла",
+        "fog": "туман",
+        "smoke": "дим",
+        "dust": "пил",
+        "sand": "пісок",
+        "ash": "попіл",
+        "squalls": "шквали",
+        "tornado": "торнадо",
+        "light rain": "невеликий дощ",
+        "moderate rain": "помірний дощ",
+        "heavy intensity rain": "сильний дощ",
+        "very heavy rain": "дуже сильний дощ",
+        "extreme rain": "екстремальний дощ",
+        "freezing rain": "крижаний дощ",
+        "shower rain": "злива",
+        "light snow": "невеликий сніг",
+        "snow": "сніг",
+        "heavy snow": "сильний сніг",
+        "sleet": "мокрий сніг",
+        "thunderstorm": "гроза",
+        "thunderstorm with rain": "гроза з дощем",
+        "thunderstorm with light rain": "гроза з невеликим дощем",
+        "thunderstorm with heavy rain": "гроза з сильним дощем",
+    },
+    "pl": {
+        "clear sky": "bezchmurnie",
+        "few clouds": "małe zachmurzenie",
+        "scattered clouds": "umiarkowane zachmurzenie",
+        "broken clouds": "duże zachmurzenie",
+        "overcast clouds": "pochmurno",
+        "mist": "mgła",
+        "haze": "zamglenie",
+        "fog": "mgła",
+        "smoke": "dym",
+        "dust": "pył",
+        "sand": "piasek",
+        "ash": "popiół",
+        "squalls": "szkwały",
+        "tornado": "tornado",
+        "light rain": "lekki deszcz",
+        "moderate rain": "umiarkowany deszcz",
+        "heavy intensity rain": "silny deszcz",
+        "very heavy rain": "bardzo silny deszcz",
+        "extreme rain": "ulewa ekstremalna",
+        "freezing rain": "marznący deszcz",
+        "shower rain": "deszcz przelotny",
+        "light snow": "lekki śnieg",
+        "snow": "śnieg",
+        "heavy snow": "intensywny śnieg",
+        "sleet": "deszcz ze śniegiem",
+        "thunderstorm": "burza",
+        "thunderstorm with rain": "burza z deszczem",
+        "thunderstorm with light rain": "burza z lekkim deszczem",
+        "thunderstorm with heavy rain": "burza z ulewnym deszczem",
+    },
+}
+
+
+def _fallback_translate_one(desc: str, target_lang: str) -> str:
+    target_lang = _normalize_lang(target_lang)
+    if target_lang == "en":
+        return desc
+    if not desc:
+        return desc
+    key = (desc or "").strip().lower()
+    return _FALLBACK.get(target_lang, {}).get(key, desc)
+
+
+def _fallback_translate_many(descs, target_lang: str):
+    return [_fallback_translate_one(x, target_lang) for x in (descs or [])]
+
+
+# =========================
+# Google Translate v3
+# =========================
 def _translate_texts(texts, target_lang: str):
     """
-    Google Cloud Translation API v3.
-    Переводим только описания погоды.
+    Translate list of strings via Google Cloud Translation API v3.
+    If creds missing/fail -> returns original.
     """
     target_lang = _normalize_lang(target_lang)
-
     if target_lang == "en":
         return texts
 
     project_id = getattr(settings, "GOOGLE_TRANSLATE_PROJECT_ID", None)
     cred_path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
-
 
     if not project_id or not cred_path:
         return texts
@@ -83,6 +242,32 @@ def _translate_texts(texts, target_lang: str):
         return texts
 
 
+def _translate_descriptions(desc_list, lang: str):
+    """
+    Smart translate:
+    - try Google
+    - if Google not available or returns English-like text -> fallback dictionary for those items
+    """
+    lang = _normalize_lang(lang)
+    if lang == "en":
+        return desc_list
+
+    original = list(desc_list or [])
+    google = _translate_texts(original, lang)
+
+    # If google returned same English for some -> fallback only for those
+    out = []
+    for src, trg in zip(original, google):
+        if (not trg) or (_looks_english(trg) and _looks_english(src)):
+            out.append(_fallback_translate_one(src, lang))
+        else:
+            out.append(trg)
+    return out
+
+
+# =========================
+# Weather fetch with hourly_by_date
+# =========================
 def _fetch_weather(city: str, lang: str = "en"):
     api_key = getattr(settings, "OPENWEATHER_API_KEY", "")
     if not api_key:
@@ -108,7 +293,10 @@ def _fetch_weather(city: str, lang: str = "en"):
 
     # 2) current weather
     w_url = "https://api.openweathermap.org/data/2.5/weather"
-    code, w, err = _get_json(w_url, {"lat": lat, "lon": lon, "appid": api_key, "units": "metric"})
+    code, w, err = _get_json(
+        w_url,
+        {"lat": lat, "lon": lon, "appid": api_key, "units": "metric"},
+    )
     if err:
         return None, f"OpenWeather current weather failed: {err}."
     if code != 200 or not isinstance(w, dict):
@@ -150,9 +338,12 @@ def _fetch_weather(city: str, lang: str = "en"):
         "day_length": _day_length_str(sunrise_ts, sunset_ts),
     }
 
-    # 3) forecast
+    # 3) forecast (3-hour steps)
     f_url = "https://api.openweathermap.org/data/2.5/forecast"
-    code, f, err = _get_json(f_url, {"lat": lat, "lon": lon, "appid": api_key, "units": "metric"})
+    code, f, err = _get_json(
+        f_url,
+        {"lat": lat, "lon": lon, "appid": api_key, "units": "metric"},
+    )
     if err:
         return None, f"OpenWeather forecast failed: {err}."
     if code != 200 or not isinstance(f, dict) or "list" not in f:
@@ -160,11 +351,31 @@ def _fetch_weather(city: str, lang: str = "en"):
         return None, msg
 
     by_date = defaultdict(list)
+    hourly_by_date = defaultdict(list)
+
     for item in f.get("list", []):
-        dt_txt = item.get("dt_txt")
-        if not dt_txt or len(dt_txt) < 10:
+        dt_txt = item.get("dt_txt")  # "YYYY-MM-DD HH:MM:SS"
+        if not dt_txt or len(dt_txt) < 19:
             continue
-        by_date[dt_txt[:10]].append(item)
+
+        date_key = dt_txt[:10]
+        time_key = dt_txt[11:16]  # "HH:MM"
+        by_date[date_key].append(item)
+
+        w0 = (item.get("weather") or [{}])[0]
+        m = item.get("main", {}) or {}
+        wd = item.get("wind", {}) or {}
+        pop = item.get("pop", 0.0)
+
+        hourly_by_date[date_key].append({
+            "time": time_key,
+            "temp": float(m.get("temp", 0.0)),
+            "feels_like": float(m.get("feels_like", 0.0)),
+            "humidity": int(m.get("humidity", 0)),
+            "wind_speed": float(wd.get("speed", 0.0)),
+            "pop": float(pop) if isinstance(pop, (int, float)) else 0.0,
+            "description": w0.get("description", "—"),
+        })
 
     dates = sorted(by_date.keys())[:5]
     daily = []
@@ -203,19 +414,59 @@ def _fetch_weather(city: str, lang: str = "en"):
             "wind_speed": float(rep_wind.get("speed", 0.0)),
         })
 
-    # Translate only description
-    texts_to_translate = [current["description"]] + daily_descs
-    translated = _translate_texts(texts_to_translate, lang)
+    # =========================
+    # ✅ TRANSLATE ALL DESCRIPTIONS:
+    # current + daily + hourly_by_date
+    # =========================
+    all_desc = []
 
-    if translated and len(translated) >= 1:
-        current["description"] = translated[0]
+    # current
+    all_desc.append(current["description"])
+
+    # daily
+    all_desc.extend(daily_descs)
+
+    # hourly (all items)
+    hourly_keys = sorted(hourly_by_date.keys())
+    hourly_positions = []  # (date, index_in_list)
+    for dk in hourly_keys:
+        for idx, obj in enumerate(hourly_by_date[dk]):
+            all_desc.append(obj.get("description", "—"))
+            hourly_positions.append((dk, idx))
+
+    translated = _translate_descriptions(all_desc, lang)
+
+    # write back
+    ptr = 0
+    if translated:
+        current["description"] = translated[ptr]; ptr += 1
+
         for i in range(len(daily)):
-            daily[i]["description"] = translated[i + 1] if (i + 1) < len(translated) else daily[i]["description"]
+            if ptr < len(translated):
+                daily[i]["description"] = translated[ptr]
+            ptr += 1
 
-    return {"current": current, "daily": daily, "sun": sun}, None
+        for (dk, idx) in hourly_positions:
+            if ptr < len(translated):
+                hourly_by_date[dk][idx]["description"] = translated[ptr]
+            ptr += 1
+
+    # Sort hourly by time
+    hourly_by_date_sorted = {}
+    for dk, arr in hourly_by_date.items():
+        hourly_by_date_sorted[dk] = sorted(arr, key=lambda x: x.get("time", "00:00"))
+
+    return {
+        "current": current,
+        "daily": daily,
+        "sun": sun,
+        "hourly_by_date": hourly_by_date_sorted,  # ✅ important for day details
+    }, None
 
 
-# ✅ NEW: suggestions endpoint (autocomplete)
+# =========================
+# Suggestions endpoint
+# =========================
 def _suggest_cities(q: str, limit: int = 7):
     api_key = getattr(settings, "OPENWEATHER_API_KEY", "")
     if not api_key:
@@ -242,7 +493,6 @@ def _suggest_cities(q: str, limit: int = 7):
         lon = item.get("lon")
 
         title = name
-        # pretty subtitle
         subtitle_parts = []
         if state:
             subtitle_parts.append(state)
@@ -260,6 +510,9 @@ def _suggest_cities(q: str, limit: int = 7):
     return {"suggestions": out}, None
 
 
+# =========================
+# Views
+# =========================
 def home(request):
     return render(request, "home.html", {})
 

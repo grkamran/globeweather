@@ -14,127 +14,130 @@
 
       <!-- MENU -->
       <div class="menu" id="menu">
-        <!-- MAIN -->
-        <div id="menuMain">
-          <div class="menu-title" id="menuTitle">Menu</div>
+        <div class="menu-panels" id="menuPanels">
 
-          <div class="menu-item" id="menuLanguage">
-            <div class="menu-left">
-              <div class="menu-ico">🌐</div>
-              <div class="menu-meta">
-                <b id="langTitle">Language</b>
-                <span id="langSubtitle">Change UI language</span>
+          <div class="menu-panel is-active" id="menuMain">
+            <div class="menu-title" id="menuTitle">Menu</div>
+
+            <div class="menu-item" id="menuLanguage">
+              <div class="menu-left">
+                <div class="menu-ico">🌐</div>
+                <div class="menu-meta">
+                  <b id="langTitle">Language</b>
+                  <span id="langSubtitle">Change UI language</span>
+                </div>
               </div>
+              <div class="menu-right" id="openText1">Open</div>
             </div>
-            <div class="menu-right" id="openText1">Open</div>
+
+            <div class="menu-item" id="menuContacts">
+              <div class="menu-left">
+                <div class="menu-ico">📩</div>
+                <div class="menu-meta">
+                  <b id="contactsTitle">Contacts</b>
+                  <span id="contactsSubtitle">Contact support</span>
+                </div>
+              </div>
+              <div class="menu-right" id="openText2">Open</div>
+            </div>
           </div>
 
-          <div class="menu-item" id="menuContacts">
-            <div class="menu-left">
-              <div class="menu-ico">📩</div>
-              <div class="menu-meta">
-                <b id="contactsTitle">Contacts</b>
-                <span id="contactsSubtitle">Contact support</span>
-              </div>
-            </div>
-            <div class="menu-right" id="openText2">Open</div>
-          </div>
-        </div>
+          <div class="menu-panel" id="menuContactsPanel">
+            <div class="menu-title" id="contactsPanelTitle">Contacts</div>
 
-        <!-- CONTACTS PANEL -->
-        <div id="menuContactsPanel" class="menu-panel fade-scroll" style="display:none;">
-          <div class="menu-title" id="contactsPanelTitle">Contacts</div>
-
-          <div class="menu-item" id="openEmail">
-            <div class="menu-left">
-              <div class="menu-ico">✉️</div>
-              <div class="menu-meta">
-                <b id="emailTitle">Email</b>
-                <span>kkaraev1@stu.vistula.edu.pl</span>
+            <div class="menu-item" id="openEmail">
+              <div class="menu-left">
+                <div class="menu-ico">✉️</div>
+                <div class="menu-meta">
+                  <b id="emailTitle">Email</b>
+                  <span>kkaraev1@stu.vistula.edu.pl</span>
+                </div>
               </div>
+              <div class="menu-right" id="openText3">Open</div>
             </div>
-            <div class="menu-right" id="openText3">Open</div>
-          </div>
 
-          <div class="menu-item" id="openInsta">
-            <div class="menu-left">
-              <div class="menu-ico">📷</div>
-              <div class="menu-meta">
-                <b id="instaTitle">Instagram</b>
-                <span>@grkamran</span>
+            <div class="menu-item" id="openInsta">
+              <div class="menu-left">
+                <div class="menu-ico">📷</div>
+                <div class="menu-meta">
+                  <b id="instaTitle">Instagram</b>
+                  <span>@grkamran</span>
+                </div>
               </div>
+              <div class="menu-right" id="openText4">Open</div>
             </div>
-            <div class="menu-right" id="openText4">Open</div>
+
+            <button class="menu-back" id="backToMenu1" type="button">← Back</button>
           </div>
 
-          <button class="menu-back" id="backToMenu1" type="button">← Back</button>
-        </div>
+          <div class="menu-panel" id="menuLanguagePanel">
+            <div class="menu-title" id="languagePanelTitle">Choose language</div>
 
-        <!-- LANGUAGE PANEL -->
-        <div id="menuLanguagePanel" class="menu-panel fade-scroll" style="display:none;">
-          <div class="menu-title" id="languagePanelTitle">Choose language</div>
-
-          <div class="menu-item" data-lang="en">
-            <div class="menu-left">
-              <div class="menu-ico">🇬🇧</div>
-              <div class="menu-meta">
-                <b>English</b>
-                <span>EN</span>
+            <div class="menu-item" data-lang="en">
+              <div class="menu-left">
+                <div class="menu-ico">🇬🇧</div>
+                <div class="menu-meta">
+                  <b>English</b>
+                  <span>EN</span>
+                </div>
               </div>
+              <div class="menu-right" id="selectText1">Select</div>
             </div>
-            <div class="menu-right" id="selectText1">Select</div>
+
+            <div class="menu-item" data-lang="ru">
+              <div class="menu-left">
+                <div class="menu-ico">🇷🇺</div>
+                <div class="menu-meta">
+                  <b>Русский</b>
+                  <span>RU</span>
+                </div>
+              </div>
+              <div class="menu-right" id="selectText2">Select</div>
+            </div>
+
+            <div class="menu-item" data-lang="tr">
+              <div class="menu-left">
+                <div class="menu-ico">🇹🇷</div>
+                <div class="menu-meta">
+                  <b>Türkçe</b>
+                  <span>TR</span>
+                </div>
+              </div>
+              <div class="menu-right" id="selectText3">Select</div>
+            </div>
+
+            <div class="menu-item" data-lang="uk">
+              <div class="menu-left">
+                <div class="menu-ico">🇺🇦</div>
+                <div class="menu-meta">
+                  <b>Українська</b>
+                  <span>UK</span>
+                </div>
+              </div>
+              <div class="menu-right" id="selectText4">Select</div>
+            </div>
+
+            <div class="menu-item" data-lang="pl">
+              <div class="menu-left">
+                <div class="menu-ico">🇵🇱</div>
+                <div class="menu-meta">
+                  <b>Polski</b>
+                  <span>PL</span>
+                </div>
+              </div>
+              <div class="menu-right" id="selectText5">Select</div>
+            </div>
+
+            <button class="menu-back" id="backToMenu2" type="button">← Back</button>
           </div>
 
-          <div class="menu-item" data-lang="ru">
-            <div class="menu-left">
-              <div class="menu-ico">🇷🇺</div>
-              <div class="menu-meta">
-                <b>Русский</b>
-                <span>RU</span>
-              </div>
-            </div>
-            <div class="menu-right" id="selectText2">Select</div>
-          </div>
-
-          <div class="menu-item" data-lang="tr">
-            <div class="menu-left">
-              <div class="menu-ico">🇹🇷</div>
-              <div class="menu-meta">
-                <b>Türkçe</b>
-                <span>TR</span>
-              </div>
-            </div>
-            <div class="menu-right" id="selectText3">Select</div>
-          </div>
-
-          <div class="menu-item" data-lang="uk">
-            <div class="menu-left">
-              <div class="menu-ico">🇺🇦</div>
-              <div class="menu-meta">
-                <b>Українська</b>
-                <span>UK</span>
-              </div>
-            </div>
-            <div class="menu-right" id="selectText4">Select</div>
-          </div>
-
-          <div class="menu-item" data-lang="pl">
-            <div class="menu-left">
-              <div class="menu-ico">🇵🇱</div>
-              <div class="menu-meta">
-                <b>Polski</b>
-                <span>PL</span>
-              </div>
-            </div>
-            <div class="menu-right" id="selectText5">Select</div>
-          </div>
-
-          <button class="menu-back" id="backToMenu2" type="button">← Back</button>
         </div>
       </div>
+
+      <div class="menu-overlay" id="menuOverlay"></div>
     </div>
 
-    <!-- Search input (FULL WIDTH like Google Maps) -->
+    <!-- Search -->
     <div class="searchwrap">
       <input id="q" placeholder="Search city" autocomplete="off" />
       <div id="suggestBox" class="suggestbox" style="display:none;"></div>
@@ -212,19 +215,72 @@
 
 </div>
 
-<!-- ✅ EASTER EGG OVERLAY (Ratne Anna) -->
-<div id="loveOverlay" class="love-overlay" aria-hidden="true">
-  <div class="love-bg"></div>
-  <div class="love-hearts" id="loveHearts"></div>
+<!-- ✅ DAY DETAILS (BOTTOM SHEET) -->
+<div class="day-sheet-overlay" id="daySheetOverlay"></div>
+
+<div class="day-sheet" id="daySheet" aria-hidden="true">
+  <div class="day-sheet-handle"></div>
+
+  <div class="day-sheet-head">
+    <div style="min-width:0;">
+      <b id="daySheetTitle" style="display:block; font-size:14px; letter-spacing:.2px; font-weight:950; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">—</b>
+      <span id="daySheetSub" style="display:block; margin-top:4px; color:rgba(255,255,255,.62); font-family: ui-monospace,monospace; font-size:12px;">—</span>
+    </div>
+
+    <button class="day-sheet-close" id="daySheetClose" type="button">✕</button>
+  </div>
+
+  <div class="day-toggle">
+    <button class="day-toggle-btn is-active" id="toggleActual" type="button">Actual</button>
+    <button class="day-toggle-btn" id="toggleFeels" type="button">Feels like</button>
+  </div>
+
+  <div class="day-chart-wrap">
+    <canvas id="dayChart" width="1000" height="320"></canvas>
+  </div>
+
+  <div class="hour-row" id="hourRow"></div>
 </div>
 
-<!-- ✅ Suggestions CSS (small, clean, google-like) -->
 <style>
+  .menu-overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.35);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .22s ease;
+    z-index: 9998;
+  }
+  .menu-overlay.show{
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .menu-panels{ position: relative; min-height: 160px; }
+  .menu-panel{
+    position: absolute; inset: 0;
+    opacity: 0; transform: translateX(14px);
+    pointer-events: none;
+    transition: opacity .22s ease, transform .22s ease;
+  }
+  .menu-panel.is-active{
+    opacity: 1; transform: translateX(0);
+    pointer-events: auto;
+    position: relative;
+  }
+
+  .citycard.card-appear{
+    opacity: 0;
+    transform: translateY(10px) scale(.99);
+    animation: cardIn .42s cubic-bezier(.2,.9,.2,1) forwards;
+    will-change: transform, opacity;
+  }
+  @keyframes cardIn{ to{ opacity:1; transform: translateY(0) scale(1); } }
+
   .suggestbox{
-    position:absolute;
-    top:52px;
-    left:0;
-    right:0;
+    position:absolute; top:52px; left:0; right:0;
     border-radius: 16px;
     border:1px solid rgba(255,255,255,.16);
     background: linear-gradient(180deg, rgba(16,20,52,.96), rgba(10,14,36,.92));
@@ -239,7 +295,7 @@
     border:1px solid rgba(255,255,255,.12);
     background: rgba(255,255,255,.06);
     border-radius: 14px;
-    padding: 10px 10px;
+    padding: 10px;
     cursor:pointer;
     display:flex;
     align-items:center;
@@ -247,39 +303,25 @@
     margin-bottom: 8px;
   }
   .sug-item:last-child{ margin-bottom: 0; }
-  .sug-item:hover,
-  .sug-item.active{
-    border-color: rgba(6,182,212,.35);
-    box-shadow: 0 0 0 4px rgba(6,182,212,.10);
-  }
+  .sug-item:hover{ border-color: rgba(6,182,212,.35); box-shadow: 0 0 0 4px rgba(6,182,212,.10); }
   .sug-ico{
     width:34px;height:34px;border-radius: 14px;
     border:1px solid rgba(255,255,255,.14);
     background: rgba(0,0,0,.18);
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    display:flex; align-items:center; justify-content:center;
     flex:0 0 auto;
   }
   .sug-meta{ min-width:0; }
   .sug-meta b{
-    display:block;
-    font-size: 13px;
-    font-weight: 950;
-    letter-spacing:.2px;
-    white-space: nowrap;
-    overflow:hidden;
-    text-overflow: ellipsis;
+    display:block; font-size: 13px; font-weight: 950; letter-spacing:.2px;
+    white-space: nowrap; overflow:hidden; text-overflow: ellipsis;
   }
   .sug-meta span{
-    display:block;
-    margin-top: 3px;
+    display:block; margin-top: 3px;
     color: rgba(255,255,255,.62);
     font-family: ui-monospace,monospace;
     font-size: 11px;
-    white-space: nowrap;
-    overflow:hidden;
-    text-overflow: ellipsis;
+    white-space: nowrap; overflow:hidden; text-overflow: ellipsis;
   }
   .sug-empty{
     border:1px dashed rgba(255,255,255,.18);
@@ -291,56 +333,115 @@
     font-size: 12px;
   }
 
-  /* ✅ LOVE OVERLAY */
-  .love-overlay{
-    position: fixed;
-    inset: 0;
-    z-index: 9999999;
-    display: none;
+  .citycard.is-clickable{ cursor:pointer; }
+  .citycard.is-clickable:hover{
+    border-color: rgba(6,182,212,.35);
+    box-shadow: 0 0 0 4px rgba(6,182,212,.10), 0 14px 40px rgba(0,0,0,.30);
+  }
+
+  .day-sheet-overlay{
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.45);
+    backdrop-filter: blur(2px);
+    opacity: 0;
     pointer-events: none;
+    transition: opacity .18s ease;
+    z-index: 99990;
   }
-  .love-overlay.show{ display:block; }
+  .day-sheet-overlay.show{ opacity: 1; pointer-events: auto; }
 
-  .love-bg{
-    position:absolute;
-    inset:0;
-    background: #000;
-    transition: background 1.2s ease;
+  .day-sheet{
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%) translateY(110%);
+    bottom: 14px;
+    width: min(860px, calc(100vw - 24px));
+    border-radius: 22px;
+    border:1px solid rgba(255,255,255,.16);
+    background: linear-gradient(180deg, rgba(16,20,52,.96), rgba(10,14,36,.92));
+    box-shadow: 0 26px 90px rgba(0,0,0,.62);
+    backdrop-filter: blur(14px);
+    z-index: 99991;
+    transition: transform .22s cubic-bezier(.2,.9,.2,1);
+    padding: 12px;
   }
-  .love-overlay.pink .love-bg{
-    background: #ff4fa3;
+  .day-sheet.show{ transform: translateX(-50%) translateY(0%); }
+
+  .day-sheet-handle{
+    width: 56px; height: 5px; border-radius: 999px;
+    background: rgba(255,255,255,.18);
+    margin: 4px auto 10px;
+  }
+  .day-sheet-head{
+    display:flex; align-items:flex-start; justify-content:space-between;
+    gap: 10px; padding: 6px 4px 10px;
+  }
+  .day-sheet-close{
+    width: 38px; height: 38px; border-radius: 999px;
+    border:1px solid rgba(255,255,255,.16);
+    background: rgba(255,255,255,.06);
+    color: rgba(255,255,255,.92);
+    cursor: pointer; font-size: 16px;
+  }
+  .day-sheet-close:active{ transform: scale(.98); }
+
+  .day-toggle{ display:flex; gap: 10px; padding: 0 4px 10px; }
+  .day-toggle-btn{
+    flex:1; height: 40px; border-radius: 999px;
+    border:1px solid rgba(255,255,255,.16);
+    background: rgba(255,255,255,.06);
+    color: rgba(255,255,255,.84);
+    cursor: pointer;
+    font-weight: 900; letter-spacing:.2px;
+  }
+  .day-toggle-btn.is-active{
+    background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(6,182,212,.88));
+    border-color: rgba(255,255,255,.22);
+    color: white;
   }
 
-  .love-hearts{
-    position:absolute;
-    inset:0;
+  .day-chart-wrap{
+    border:1px solid rgba(255,255,255,.14);
+    background: rgba(255,255,255,.05);
+    border-radius: 18px;
+    padding: 10px;
     overflow:hidden;
   }
 
-  .love-heart{
-    position:absolute;
-    bottom: -80px;
-    left: 50%;
-    font-size: 28px;
-    opacity: 0.0;
-    transform: translateX(-50%);
-    filter: drop-shadow(0 10px 18px rgba(0,0,0,.25));
-    animation: love-rise linear forwards;
-    user-select:none;
-    will-change: transform, opacity;
+  .hour-row{
+    margin-top: 10px;
+    display:flex;
+    gap: 10px;
+    overflow:auto;
+    padding-bottom: 6px;
+  }
+  .hour-row::-webkit-scrollbar{ height: 10px; }
+  .hour-row::-webkit-scrollbar-track{
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 999px;
+  }
+  .hour-row::-webkit-scrollbar-thumb{
+    background: linear-gradient(180deg, rgba(124,58,237,.55), rgba(6,182,212,.45));
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 999px;
   }
 
-  @keyframes love-rise{
-    0%{
-      transform: translateX(var(--x)) translateY(0) scale(var(--s)) rotate(var(--r));
-      opacity: 0;
-    }
-    10%{ opacity: .95; }
-    60%{ opacity: .95; }
-    100%{
-      transform: translateX(calc(var(--x) + var(--drift))) translateY(calc(-1 * var(--h))) scale(var(--s)) rotate(calc(var(--r) + 40deg));
-      opacity: 0;
-    }
+  .hour-card{
+    flex: 0 0 auto;
+    width: 128px;
+    border-radius: 18px;
+    border:1px solid rgba(255,255,255,.14);
+    background: rgba(0,0,0,.18);
+    padding: 10px;
+  }
+  .hour-card b{ display:block; font-size: 13px; font-weight: 950; }
+  .hour-card .mini{
+    margin-top: 6px;
+    font-size: 11px;
+    color: rgba(255,255,255,.62);
+    font-family: ui-monospace,monospace;
+    line-height: 1.35;
   }
 </style>
 
@@ -355,7 +456,7 @@
   const $ = (id) => document.getElementById(id);
 
   // =========================
-  // i18n (UI Language)
+  // i18n
   // =========================
   const I18N = {
     en: {
@@ -390,8 +491,11 @@
       noForecastTitle: "No forecast",
       tryAnotherCity: "Try another city",
       noSuggestions: "No matches",
+      details: "Details",
+      pop: "Rain",
+      actual: "Actual",
+      feels: "Feels like",
     },
-
     ru: {
       brandTitle: "Погода",
       menuTitle: "Меню",
@@ -424,8 +528,11 @@
       noForecastTitle: "Нет прогноза",
       tryAnotherCity: "Попробуйте другой город",
       noSuggestions: "Ничего не найдено",
+      details: "Детали",
+      pop: "Дождь",
+      actual: "Фактически",
+      feels: "Ощущ. как",
     },
-
     tr: {
       brandTitle: "Hava",
       menuTitle: "Menü",
@@ -458,8 +565,11 @@
       noForecastTitle: "Tahmin yok",
       tryAnotherCity: "Başka bir şehir deneyin",
       noSuggestions: "Sonuç yok",
+      details: "Detay",
+      pop: "Yağış",
+      actual: "Gerçek",
+      feels: "Hissedilen",
     },
-
     uk: {
       brandTitle: "Погода",
       menuTitle: "Меню",
@@ -492,15 +602,18 @@
       noForecastTitle: "Немає прогнозу",
       tryAnotherCity: "Спробуйте інше місто",
       noSuggestions: "Нічого не знайдено",
+      details: "Деталі",
+      pop: "Дощ",
+      actual: "Фактично",
+      feels: "Відч.",
     },
-
     pl: {
       brandTitle: "Pogoda",
       menuTitle: "Menu",
       langTitle: "Język",
       langSubtitle: "Zmień język interfejsu",
       contactsTitle: "Kontakt",
-      contactsSubtitle: "Skontaktuj się ze wsparciem",
+      contactsSubtitle: "Skontuj się ze wsparciem",
       open: "Otwórz",
       select: "Wybierz",
       back: "← Wróć",
@@ -526,18 +639,18 @@
       noForecastTitle: "Brak prognozy",
       tryAnotherCity: "Spróbuj inne miasto",
       noSuggestions: "Brak wyników",
+      details: "Szczegóły",
+      pop: "Deszcz",
+      actual: "Faktycznie",
+      feels: "Odczuw.",
     },
   };
 
-  function getLang() {
-    return localStorage.getItem("gw_lang") || "en";
-  }
-
+  function getLang(){ return localStorage.getItem("gw_lang") || "en"; }
   function t(key){
     const lang = getLang();
     return (I18N[lang] && I18N[lang][key]) ? I18N[lang][key] : (I18N.en[key] || key);
   }
-
   function localeForLang(lang){
     switch((lang || "en").toLowerCase()){
       case "ru": return "ru-RU";
@@ -553,10 +666,8 @@
     $("q").placeholder = I18N[lang].searchPlaceholder;
 
     $("menuTitle").textContent = I18N[lang].menuTitle;
-
     $("langTitle").textContent = I18N[lang].langTitle;
     $("langSubtitle").textContent = I18N[lang].langSubtitle;
-
     $("contactsTitle").textContent = I18N[lang].contactsTitle;
     $("contactsSubtitle").textContent = I18N[lang].contactsSubtitle;
 
@@ -594,86 +705,54 @@
     $("sunsetLabel").textContent = I18N[lang].sunset;
     $("dayLenLabel").textContent = I18N[lang].dayLen;
 
+    $("toggleActual").textContent = I18N[lang].actual;
+    $("toggleFeels").textContent = I18N[lang].feels;
+
     const st = $("statusText").textContent.trim();
-    if (st && ["Ready","Готово","Hazır","Gotowe"].includes(st)) {
-      $("statusText").textContent = I18N[lang].ready;
-    }
+    if (st && ["Ready","Готово","Hazır","Gotowe"].includes(st)) $("statusText").textContent = I18N[lang].ready;
   }
 
   // =========================
-  // MENU LOGIC
+  // MENU
   // =========================
   const menuBtn = $("menuBtn");
   const menu = $("menu");
+  const menuOverlay = $("menuOverlay");
 
   const menuMain = $("menuMain");
   const menuContactsPanel = $("menuContactsPanel");
   const menuLanguagePanel = $("menuLanguagePanel");
 
-  function showMain(){
-    menuMain.style.display = "block";
-    menuContactsPanel.style.display = "none";
-    menuLanguagePanel.style.display = "none";
+  function activate(panelEl){
+    [menuMain, menuContactsPanel, menuLanguagePanel].forEach(p => p.classList.remove("is-active"));
+    panelEl.classList.add("is-active");
   }
-  function showContacts(){
-    menuMain.style.display = "none";
-    menuContactsPanel.style.display = "block";
-    menuLanguagePanel.style.display = "none";
-    setTimeout(() => updateFade(menuContactsPanel), 0);
+  function openMenu(){
+    menu.classList.add("show");
+    menuOverlay.classList.add("show");
+    activate(menuMain);
   }
-  function showLanguage(){
-    menuMain.style.display = "none";
-    menuContactsPanel.style.display = "none";
-    menuLanguagePanel.style.display = "block";
-    setTimeout(() => updateFade(menuLanguagePanel), 0);
-  }
-
-  function openMenu(){ menu.classList.add("show"); }
   function closeMenu(){
     menu.classList.remove("show");
-    showMain();
+    menuOverlay.classList.remove("show");
+    activate(menuMain);
   }
 
-  // =========================
-  // ✅ Fade scroll indicator
-  // =========================
-  function updateFade(panel){
-    if(!panel) return;
-    const top = panel.scrollTop <= 2;
-    const bottom = (panel.scrollTop + panel.clientHeight) >= (panel.scrollHeight - 2);
-    panel.classList.toggle("at-top", top);
-    panel.classList.toggle("at-bottom", bottom);
-  }
-
-  function bindFade(panel){
-    if(!panel || panel.__fadeBound) return;
-    panel.__fadeBound = true;
-    updateFade(panel);
-    panel.addEventListener("scroll", () => updateFade(panel), { passive: true });
-    const obs = new MutationObserver(() => updateFade(panel));
-    obs.observe(panel, { childList: true, subtree: true });
-  }
-
-  bindFade(menuLanguagePanel);
-  bindFade(menuContactsPanel);
-
-  // =========================
-  // menu open/close
-  // =========================
   menuBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     if(menu.classList.contains("show")) closeMenu();
     else openMenu();
   });
 
-  document.addEventListener("click", () => closeMenu());
   menu.addEventListener("click", (e) => e.stopPropagation());
+  menuOverlay.addEventListener("click", () => closeMenu());
+  document.addEventListener("click", () => closeMenu());
 
-  $("menuLanguage").addEventListener("click", () => showLanguage());
-  $("menuContacts").addEventListener("click", () => showContacts());
+  $("menuLanguage").addEventListener("click", () => activate(menuLanguagePanel));
+  $("menuContacts").addEventListener("click", () => activate(menuContactsPanel));
 
-  $("backToMenu1").addEventListener("click", () => showMain());
-  $("backToMenu2").addEventListener("click", () => showMain());
+  $("backToMenu1").addEventListener("click", () => activate(menuMain));
+  $("backToMenu2").addEventListener("click", () => activate(menuMain));
 
   menuLanguagePanel.addEventListener("click", (e) => {
     const item = e.target.closest(".menu-item[data-lang]");
@@ -683,78 +762,11 @@
     location.reload();
   });
 
-  $("openEmail").addEventListener("click", () => {
-    window.location.href = "mailto:kkaraev1@stu.vistula.edu.pl";
-  });
-  $("openInsta").addEventListener("click", () => {
-    window.open("https://www.instagram.com/grkamran/", "_blank", "noopener,noreferrer");
-  });
+  $("openEmail").addEventListener("click", () => { window.location.href = "mailto:kkaraev1@stu.vistula.edu.pl"; });
+  $("openInsta").addEventListener("click", () => { window.open("https://www.instagram.com/grkamran/", "_blank", "noopener,noreferrer"); });
 
   // =========================
-  // ✅ EASTER EGG: "Ратне анна"
-  // =========================
-  const loveOverlay = $("loveOverlay");
-  const loveHearts = $("loveHearts");
-  let loveRunning = false;
-
-  function normalizeQuery(s){
-    return String(s || "")
-      .trim()
-      .toLowerCase()
-      .replace(/\s+/g, " ");
-  }
-
-  function startLoveEasterEgg(){
-    if(loveRunning) return;
-    loveRunning = true;
-
-    loveOverlay.classList.add("show");
-    loveOverlay.classList.remove("pink");
-    loveHearts.innerHTML = "";
-
-    setTimeout(() => {
-      loveOverlay.classList.add("pink");
-    }, 400);
-
-    const hearts = ["💗","💖","💘","💕","💞","💓"];
-    const start = Date.now();
-
-    function spawnHeart(){
-      const h = document.createElement("div");
-      h.className = "love-heart";
-      h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-
-      const left = Math.random() * 100;
-      const scale = 0.7 + Math.random() * 1.3;
-      const height = 550 + Math.random() * 650;
-      const drift = (-80 + Math.random() * 160);
-      const rot = (-25 + Math.random() * 50);
-      const dur = 3.2 + Math.random() * 2.8;
-
-      h.style.left = left + "%";
-      h.style.setProperty("--x", "0px");
-      h.style.setProperty("--s", scale.toFixed(2));
-      h.style.setProperty("--h", height.toFixed(0) + "px");
-      h.style.setProperty("--drift", drift.toFixed(0) + "px");
-      h.style.setProperty("--r", rot.toFixed(0) + "deg");
-      h.style.animationDuration = dur.toFixed(2) + "s";
-
-      loveHearts.appendChild(h);
-
-      setTimeout(() => { h.remove(); }, (dur + 0.2) * 1000);
-    }
-
-    const interval = setInterval(() => {
-      spawnHeart();
-      if(Math.random() > 0.55) spawnHeart();
-      if(Date.now() - start >= 10000) clearInterval(interval);
-    }, 140);
-
-    setTimeout(() => { location.reload(); }, 10000);
-  }
-
-  // =========================
-  // WEATHER APP
+  // WEATHER
   // =========================
   const statusEl = $("status");
   const statusText = $("statusText");
@@ -768,7 +780,6 @@
   function nowTime(){
     return new Date().toLocaleTimeString(localeForLang(getLang()), {hour:"2-digit", minute:"2-digit"});
   }
-
   function fmtLocalClockFromOffset(offsetSeconds){
     const nowUtcMs = Date.now();
     const localMs = nowUtcMs + (offsetSeconds * 1000);
@@ -776,20 +787,12 @@
     return d.toLocaleTimeString(localeForLang(getLang()), {hour:"2-digit", minute:"2-digit"});
   }
 
-  const map = L.map("map", {
-    zoomControl:true,
-    preferCanvas:true,
-    minZoom: 2
-  }).setView([20,10], 2);
-
+  const map = L.map("map", { zoomControl:true, preferCanvas:true, minZoom: 2 }).setView([20,10], 2);
   const worldBounds = L.latLngBounds(L.latLng(-85, -180), L.latLng(85, 180));
   map.setMaxBounds(worldBounds);
   map.on("drag", () => map.panInsideBounds(worldBounds, { animate:false }));
 
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution: '&copy; OpenStreetMap'
-  }).addTo(map);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: '&copy; OpenStreetMap' }).addTo(map);
 
   let pinMarker = null;
 
@@ -819,7 +822,6 @@
       iconSize: [180, 118],
       iconAnchor: [90, 118]
     });
-
     if (pinMarker) map.removeLayer(pinMarker);
     pinMarker = L.marker([lat, lon], { icon }).addTo(map);
   }
@@ -839,9 +841,7 @@
     const lang = getLang();
     const res = await fetch(`/api/suggest/?q=${encodeURIComponent(q)}&lang=${encodeURIComponent(lang)}&limit=7`);
     const data = await res.json().catch(() => ({}));
-    if(!res.ok){
-      return { suggestions: [] };
-    }
+    if(!res.ok) return { suggestions: [] };
     return data;
   }
 
@@ -860,6 +860,232 @@
     return "⛅";
   }
 
+  // =========================
+  // ✅ DAY SHEET: make 00:00 -> 23:00
+  // =========================
+  const daySheet = $("daySheet");
+  const daySheetOverlay = $("daySheetOverlay");
+  const daySheetClose = $("daySheetClose");
+  const daySheetTitle = $("daySheetTitle");
+  const daySheetSub = $("daySheetSub");
+  const hourRow = $("hourRow");
+
+  const toggleActual = $("toggleActual");
+  const toggleFeels = $("toggleFeels");
+  const chartCanvas = $("dayChart");
+  const ctx = chartCanvas.getContext("2d");
+
+  let lastSearchData = null;
+  let currentSheetDate = null;
+  let chartMode = "temp"; // "temp" | "feels"
+
+  function openDaySheet(){
+    daySheet.classList.add("show");
+    daySheetOverlay.classList.add("show");
+    daySheet.setAttribute("aria-hidden", "false");
+  }
+  function closeDaySheet(){
+    daySheet.classList.remove("show");
+    daySheetOverlay.classList.remove("show");
+    daySheet.setAttribute("aria-hidden", "true");
+  }
+  daySheetOverlay.addEventListener("click", closeDaySheet);
+  daySheetClose.addEventListener("click", closeDaySheet);
+  document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeDaySheet(); });
+
+  function setToggle(mode){
+    chartMode = mode;
+    toggleActual.classList.toggle("is-active", mode === "temp");
+    toggleFeels.classList.toggle("is-active", mode === "feels");
+    if(currentSheetDate) renderDayDetails(currentSheetDate);
+  }
+  toggleActual.addEventListener("click", () => setToggle("temp"));
+  toggleFeels.addEventListener("click", () => setToggle("feels"));
+
+  function safeNum(x, fallback=0){
+    const n = Number(x);
+    return Number.isFinite(n) ? n : fallback;
+  }
+
+  function pad2(n){ return String(n).padStart(2,"0"); }
+
+  // ✅ Make hourly timeline 24 points (00..23), using nearest previous value.
+  function buildFullDaySeries(arr){
+    // arr: [{time:"04:00", temp, feels_like, humidity, wind_speed, pop, description}, ...]
+    // return: 24 objects (00..23)
+    const byHour = {};
+    (arr || []).forEach(x => {
+      const hh = parseInt(String(x.time || "0").slice(0,2), 10);
+      if(Number.isFinite(hh)) byHour[hh] = x;
+    });
+
+    // If day begins without data, use first available point as initial seed
+    let first = null;
+    for(let h=0; h<24; h++){
+      if(byHour[h]) { first = byHour[h]; break; }
+    }
+    if(!first) return []; // no data at all
+
+    const out = [];
+    let last = first;
+
+    for(let h=0; h<24; h++){
+      if(byHour[h]) last = byHour[h];
+
+      // clone + force time = HH:00
+      out.push({
+        ...last,
+        time: `${pad2(h)}:00`,
+      });
+    }
+    return out;
+  }
+
+  function drawChart(points, labels){
+    const dpr = window.devicePixelRatio || 1;
+    const w = chartCanvas.clientWidth ? chartCanvas.clientWidth : 760;
+    const h = 260;
+
+    chartCanvas.width = Math.floor(w * dpr);
+    chartCanvas.height = Math.floor(h * dpr);
+    chartCanvas.style.width = w + "px";
+    chartCanvas.style.height = h + "px";
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+
+    ctx.clearRect(0,0,w,h);
+
+    const padL = 44, padR = 18, padT = 18, padB = 34;
+    const plotW = w - padL - padR;
+    const plotH = h - padT - padB;
+
+    let minV = Math.min(...points);
+    let maxV = Math.max(...points);
+    if(!Number.isFinite(minV) || !Number.isFinite(maxV)){ minV = 0; maxV = 1; }
+    if (maxV - minV < 2){ maxV += 1; minV -= 1; }
+
+    // grid
+    ctx.strokeStyle = "rgba(255,255,255,.10)";
+    ctx.lineWidth = 1;
+    for(let i=0;i<=4;i++){
+      const y = padT + (plotH*(i/4));
+      ctx.beginPath();
+      ctx.moveTo(padL, y);
+      ctx.lineTo(w-padR, y);
+      ctx.stroke();
+    }
+
+    const toX = (i) => padL + (plotW * (i / Math.max(1, points.length-1)));
+    const toY = (v) => {
+      const t = (v - minV) / (maxV - minV);
+      return padT + (plotH * (1 - t));
+    };
+
+    // line
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = "rgba(120,70,255,.95)";
+    ctx.beginPath();
+    points.forEach((v,i)=>{
+      const x = toX(i);
+      const y = toY(v);
+      if(i===0) ctx.moveTo(x,y);
+      else ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+
+    // fill
+    ctx.lineTo(toX(points.length-1), padT+plotH);
+    ctx.lineTo(toX(0), padT+plotH);
+    ctx.closePath();
+    const grad = ctx.createLinearGradient(0,padT,0,padT+plotH);
+    grad.addColorStop(0,"rgba(6,182,212,.30)");
+    grad.addColorStop(1,"rgba(124,58,237,.12)");
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    // dots: показываем не все 24 точки, а через 2 часа (чтобы не было слишком много)
+    ctx.fillStyle = "rgba(255,255,255,.92)";
+    for(let i=0;i<points.length;i+=2){
+      const x = toX(i), y = toY(points[i]);
+      ctx.beginPath();
+      ctx.arc(x,y,3.5,0,Math.PI*2);
+      ctx.fill();
+    }
+
+    // y labels
+    ctx.fillStyle = "rgba(255,255,255,.65)";
+    ctx.font = "12px ui-monospace, monospace";
+    ctx.fillText(`${Math.round(maxV)}°`, 8, padT+6);
+    ctx.fillText(`${Math.round(minV)}°`, 8, padT+plotH);
+
+    // x labels: 00, 06, 12, 18, 23
+    ctx.fillStyle = "rgba(255,255,255,.55)";
+    ctx.font = "11px ui-monospace, monospace";
+    const pick = [0,6,12,18,23];
+    pick.forEach(i=>{
+      const x = toX(i);
+      const txt = labels[i] || "";
+      ctx.fillText(txt, x-14, padT+plotH+22);
+    });
+  }
+
+  function renderDayDetails(dateIso){
+    if(!lastSearchData) return;
+
+    const hourlyByDate = lastSearchData.hourly_by_date || {};
+    const arrRaw = hourlyByDate[dateIso] || [];
+    const arr = buildFullDaySeries(arrRaw);
+
+    if(!arr.length){
+      daySheetTitle.textContent = dayLabel(dateIso);
+      daySheetSub.textContent = "—";
+      hourRow.innerHTML = `<div class="hour-card" style="width:100%; text-align:center;">
+        <b>${t("noForecastTitle")}</b>
+        <div class="mini">${t("tryAnotherCity")}</div>
+      </div>`;
+      drawChart([0,0,0],[ "—","—","—" ]);
+      return;
+    }
+
+    const cityName = lastSearchData?.current?.city || "—";
+    const country = lastSearchData?.current?.country || "";
+    daySheetTitle.textContent = dayLabel(dateIso);
+    daySheetSub.textContent = `${cityName}${country ? ", " + country : ""} • ${t("details")}`;
+
+    const labels = arr.map(x => x.time);
+    const points = arr.map(x => chartMode === "feels" ? safeNum(x.feels_like) : safeNum(x.temp));
+    drawChart(points, labels);
+
+    // Cards: 24 cards can be too many → покажем 8 ключевых часов: 00,03,06,09,12,15,18,21
+    const pickHours = new Set([0,3,6,9,12,15,18,21]);
+    const showArr = arr.filter(x => pickHours.has(parseInt(x.time.slice(0,2),10)));
+
+    hourRow.innerHTML = showArr.map(x => {
+      const popPct = Math.round(safeNum(x.pop,0) * 100);
+      const tempShown = Math.round(chartMode === "feels" ? safeNum(x.feels_like) : safeNum(x.temp));
+      return `
+        <div class="hour-card">
+          <b>${x.time}</b>
+          <div class="mini">
+            ${iconFor(x.description)} ${tempShown}°<br>
+            ${x.description || "—"}<br>
+            ${t("hum")} ${safeNum(x.humidity)}% • ${t("wind")} ${safeNum(x.wind_speed).toFixed(1)} ${t("ms")}<br>
+            ${t("pop")} ${popPct}%
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function openDay(dateIso){
+    currentSheetDate = dateIso;
+    setToggle(chartMode);
+    renderDayDetails(dateIso);
+    openDaySheet();
+  }
+
+  // =========================
+  // Next 4 days clickable
+  // =========================
   function renderNext4Days(daily){
     const list = $("daylist");
     list.innerHTML = "";
@@ -868,7 +1094,8 @@
 
     if (!next.length){
       const el = document.createElement("div");
-      el.className = "citycard";
+      el.className = "citycard card-appear";
+      el.style.animationDelay = "0ms";
       el.innerHTML = `
         <div class="city-left">
           <div class="ico">⛅</div>
@@ -883,9 +1110,12 @@
       return;
     }
 
-    next.forEach(d => {
+    next.forEach((d, i) => {
       const el = document.createElement("div");
-      el.className = "citycard";
+      el.className = "citycard card-appear is-clickable";
+      el.style.animationDelay = (i * 90) + "ms";
+      el.setAttribute("data-date", d.date);
+
       el.innerHTML = `
         <div class="city-left">
           <div class="ico">${iconFor(d.description)}</div>
@@ -896,6 +1126,8 @@
         </div>
         <div class="city-temp">${Math.round(d.min)}°/${Math.round(d.max)}°</div>
       `;
+
+      el.addEventListener("click", () => openDay(d.date));
       list.appendChild(el);
     });
   }
@@ -910,11 +1142,6 @@
   }
 
   async function search(city){
-    if(normalizeQuery(city) === "ратне анна"){
-      startLoveEasterEgg();
-      return;
-    }
-
     if(!city){
       setStatus(t("typeCityName"));
       return;
@@ -923,6 +1150,8 @@
     try{
       setStatus(t("searching"), "loading");
       const data = await apiSearch(city);
+      lastSearchData = data;
+
       const c = data.current;
 
       setPin(c.lat, c.lon, c.temp_min, c.temp_max, c.description, c.humidity, c.wind_speed);
@@ -939,27 +1168,26 @@
     }
   }
 
-  // =========================
-  // AUTOCOMPLETE (NO SEARCH BUTTON)
-  // =========================
+  // AUTOCOMPLETE
   const input = $("q");
   const box = $("suggestBox");
-
   let debounceTimer = null;
-  let activeIndex = -1;
   let currentItems = [];
 
   function closeSuggest(){
     box.style.display = "none";
     box.innerHTML = "";
-    activeIndex = -1;
     currentItems = [];
+  }
+
+  function escapeHtml(s){
+    return String(s ?? "").replace(/[&<>"']/g, (c) => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[c]));
   }
 
   function renderSuggest(items){
     currentItems = items || [];
-    activeIndex = -1;
-
     if(!currentItems.length){
       box.innerHTML = `<div class="sug-empty">${t("noSuggestions")}</div>`;
       box.style.display = "block";
@@ -982,30 +1210,9 @@
     box.style.display = "block";
   }
 
-  function setActive(idx){
-    const els = [...box.querySelectorAll(".sug-item")];
-    els.forEach(e => e.classList.remove("active"));
-    if(idx >= 0 && idx < els.length){
-      els[idx].classList.add("active");
-      activeIndex = idx;
-      els[idx].scrollIntoView({ block: "nearest" });
-    } else {
-      activeIndex = -1;
-    }
-  }
-
-  function escapeHtml(s){
-    return String(s ?? "").replace(/[&<>"']/g, (c) => ({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-    }[c]));
-  }
-
   async function doSuggest(){
     const q = input.value.trim();
-    if(q.length < 2){
-      closeSuggest();
-      return;
-    }
+    if(q.length < 2){ closeSuggest(); return; }
     const data = await apiSuggest(q);
     renderSuggest(data.suggestions || []);
   }
@@ -1027,37 +1234,14 @@
     search(it.title);
   });
 
+  // One Enter handler
   input.addEventListener("keydown", (e) => {
-    if(box.style.display !== "block"){
-      if(e.key === "Enter"){
-        e.preventDefault();
-        const q = input.value.trim();
-        if(q) search(q);
-      }
-      return;
-    }
-
-    if(e.key === "ArrowDown"){
+    if(e.key === "Escape"){ closeSuggest(); return; }
+    if(e.key === "Enter"){
       e.preventDefault();
-      setActive(Math.min(activeIndex + 1, currentItems.length - 1));
-    } else if(e.key === "ArrowUp"){
-      e.preventDefault();
-      setActive(Math.max(activeIndex - 1, 0));
-    } else if(e.key === "Escape"){
-      e.preventDefault();
+      const q = input.value.trim();
       closeSuggest();
-    } else if(e.key === "Enter"){
-      e.preventDefault();
-      if(activeIndex >= 0 && currentItems[activeIndex]){
-        const it = currentItems[activeIndex];
-        input.value = it.title;
-        closeSuggest();
-        search(it.title);
-      } else {
-        const q = input.value.trim();
-        closeSuggest();
-        if(q) search(q);
-      }
+      if(q) search(q);
     }
   });
 
@@ -1066,9 +1250,11 @@
     if(!wrap.contains(e.target)) closeSuggest();
   });
 
-  // =========================
+  // close sheet handlers
+  daySheetOverlay.addEventListener("click", closeDaySheet);
+  daySheetClose.addEventListener("click", closeDaySheet);
+
   // INIT
-  // =========================
   applyLang(getLang());
   setStatus(t("ready"));
 })();
